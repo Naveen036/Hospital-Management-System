@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block body %}
+<script src="{{url_for('static', filename='js/cities.js')}}"></script>
+
+{% include "includes/_messages.html" %}
+
+<div class='container'>
+    <div class="row justify-content-center">
+        <div class="col my-3">
+            <h1 class="display-4 text-center">Add Patient</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-12 my-2">
+            <form method="POST" action='/dashboard/addPatient'>
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Patient SSN<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="text" class="form-control" name="patient_ssn" id="patient_ssn"
+                            aria-describedby="helpId" placeholder="" required>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>Patient Name<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="text" class="form-control" name="patient_name" id="patient_name"
+                            aria-describedby="helpId" placeholder="" required>
+                    </div>
+                </div>
+
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Age<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="number" class="form-control" name="age" id="age" aria-describedby="helpId"
+                            placeholder="" required>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>Date of Admission<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="date" class="form-control" name="doa" id="doa" aria-describedby="helpId"
+                            placeholder="" required>
+                    </div>
+                </div>
+
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Type of Bed<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <select class="form-control" name="bed_type" id="bed_type" required>
+                            <option value="">Select bed type</option>
+                            <option value="General ward">General ward</option>
+                            <option value="Semi sharing">Semi sharing</option>
+                            <option value="Single room">Single room</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>Address<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <textarea rows="4" cols="50" class="form-control" name="address" id="address"
+                            required></textarea>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>State<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12 form-group">
+                        <select onchange="print_city('patient_city', this.selectedIndex);" id="patient_state"
+                            name="patient_state" class="form-control" required></select>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>City<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12 form-group">
+                        <select id="patient_city" name="patient_city" class="form-control" required></select>
+                    </div>
+                </div>
+                <div class="row justify-content-center my-3">
+
+                    <div class="col-md-6 col-12 my-md-0 my-2">
+                        <input type="submit" class="btn btn-success btn-block " value="Submit">
+
+                    </div>
+                    <div class="col-md-6 col-12 my-md-0 my-2">
+                        <input type="reset" class="btn btn-secondary btn-block " value="Reset">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script language="javascript">
+    print_state("patient_state");
+</script>
+{% endblock %}

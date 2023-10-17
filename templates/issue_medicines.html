@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+
+{% include "includes/_messages.html" %}
+
+<div class='container'>
+    <div class="row justify-content-center">
+        <div class="col my-3">
+            <h1 class="display-4 text-center">Issue Medicines</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center my-4">
+        <form method='POST' action='/dashboard/issueMedicine'>
+            <div class="row my-2">
+                <div class="col-md-3 col-12 my-2 text-md-center">
+                    <label for="">Patient Id<span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-6 col-12 my-2">
+                    <input type="text" class="form-control" name="patient_id" id="patient_id" aria-describedby="helpId"
+                        placeholder="" required="">
+                </div>
+                <div class="col-md-3 col-12 my-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% if p %}
+    <div class="row justify-content-center">
+        <div class="col-12 my-3">
+            <table class=" table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Patient ID</th>
+                        <th scope="col">Patient Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">DOJ</th>
+                        <th scope="col">Type of Room</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>{{p.pat_id}}</td>
+                        <td>{{p.pat_name}}</td>
+                        <td>{{p.pat_age}}</td>
+                        <td>{{p.pat_addr}}</td>
+                        <td>{{p.pat_doa}}</td>
+                        <td>{{p.pat_bed_type}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% if patmed %}
+    <div class="row justify-content-center my-4">
+        <div class="col-md-6 col-12 my-3">
+
+            <table class=" table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Medicine Name</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for pm in patmed %}
+                    <tr>
+                        <td> {{pm.patmed_name}}</td>
+                        <td>{{pm.patmed_cost}}</td>
+                        <td>{{pm.patmed_qty}}</td>
+                        <td>{{pm.patmed_amt}}</td>
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% endif %}
+    <div class="row justify-content-center my-4">
+        <form method='POST' action='/dashboard/issueMedicine/add'>
+            <div class="row my-2">
+                <div class="col-md-2 col-12 my-2 text-md-center">
+                    <label for="">Medicine Name<span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-4 col-12 my-2">
+                    <select id="med_name" name="med_name" class="form-control" required>
+                        <option value="">Select Option</option>
+                        {% for m in allmed %}
+                        <option value="{{m.med_name}}">{{m.med_name}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div class="col-md-2 col-12 my-2">
+                    <label for="">Quantity<span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-2 col-12 my-2">
+                    <input type="number" class="form-control" name="med_qty" id="med_qty" aria-describedby="helpId"
+                        placeholder="" required="">
+                </div>
+                <div class="col-md-2 col-12 my-2">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if medicines %}
+    <div class="row justify-content-center my-4">
+        <div class="col-md-6 col-12 my-3">
+
+            <table class=" table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Medicine Name</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                    {% for m in medicines %}
+                    <tr>
+                        <td>{{m["name"]}}</td>
+                        <td>{{m["cost"]}}</td>
+                        <td>{{m["qty"]}}</td>
+                        <td>{{m["amt"]}}</td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+            </table>
+            <div class="row justify-content-center my-4">
+                <div class="col-md-4 col-12 my-3">
+                    <a href="/dashboard/issueMedicine/issueMedDone" class="btn btn-primary text-center">Issue
+                        Medicines</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% endif %}
+
+    </div>
+
+    {% endblock %}

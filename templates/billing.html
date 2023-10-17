@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col my-2">
+            <h1 class="display-4 text-center">Billing</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center my-1">
+        <form method='POST' action='/dashboard/billing'>
+            <div class="row my-2">
+                <div class="col-md-3 col-12 my-2 text-md-center">
+                    <label for="">Patient Id<span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-6 col-12 my-2">
+                    <input type="text" class="form-control" name="patient_id" id="patient_id" aria-describedby="helpId"
+                        placeholder="" required="">
+                </div>
+                <div class="col-md-3 col-12 my-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-8 my-1">
+            {% include "includes/_messages.html"%}
+        </div>
+    </div>
+
+    {% if p %}
+    <div class="row justify-content-center">
+        <div class="col-12 my-1">
+            <table class=" table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Patient ID</th>
+                        <th scope="col">Patient Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">DOJ</th>
+                        <th scope="col">DOD</th>
+                        <th scope="col">No.of Days</th>
+                        <th scope="col">Type of Room</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <th>{{p.pat_id}}</th>
+                        <td>{{p.pat_name}}</td>
+                        <td>{{p.pat_age}}</td>
+                        <td>{{p.pat_addr}}</td>
+                        <td>{{p.pat_doa}}</td>
+                        <td>{{dod}}</td>
+                        <td>{{nod}}</td>
+                        <td>{{p.pat_bed_type}}</td>
+                        <td>{{p.pat_status}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+        {% if p.pat_status!='Discharged' %}
+        <div class="row justify-content-end my-4">
+            <div class="col-md-3 col-12 my-1">
+                <p class="text-center"> <b>Bill for Room : {{rt}}</b> </p>
+            </div>
+        </div>
+        {% endif %}
+    {% endif %}
+
+    {% if patmed %}
+    <div class="row justify-content-center">
+        <div class="col my-1">
+            <h4 class="display-5 text-center">Pharmacy Charges</h4>
+        </div>
+    </div>
+    <div class="row justify-content-center my-4">
+        <div class="col-md-6 col-12 my-1">
+
+            <table class=" table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Medicine Name</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for pm in patmed %}
+                    <tr>
+                        <td> {{pm.patmed_name}}</td>
+                        <td>{{pm.patmed_cost}}</td>
+                        <td>{{pm.patmed_qty}}</td>
+                        <td>{{pm.patmed_amt}}</td>
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-end my-4">
+        <div class="col-md-3 col-12 my-1">
+            <p class="text-center"><b> Bill for Pharmacy : {{mt}} </b></p>
+        </div>
+    </div>
+
+    {% endif %}
+
+    {% if patdiag %}
+    <div class="row justify-content-center">
+        <div class="col my-1">
+            <h4 class="display-5 text-center">Diagnostic Charges</h4>
+        </div>
+    </div>
+    <div class="row justify-content-center my-4">
+        <div class="col-md-6 col-12 my-1">
+
+            <table class=" table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Diagnostic Test Name</th>
+                        <th scope="col">Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for pd in patdiag %}
+                    <tr>
+                        <td> {{pd.patdiag_name}}</td>
+                        <td>{{pd.patdiag_cost}}</td>
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row justify-content-end my-4">
+        <div class="col-md-3 col-12 my-1">
+            <p class="text-center"><b> Bill for Diagnostics : {{dt}}</b> </p>
+        </div>
+    </div>
+
+    {% endif %}
+    {%if p%}
+    {% if p.pat_status!='Discharged' %}
+    <div class="row justify-content-end my-4">
+        <div class="col-md-3 col-12 mb-1 py-0">
+            <p class="text-center"><b> Grand Total : {{rt+mt+dt}} </b></p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-1 mb-5">
+            <a href="/dashboard/billingDone" class="btn btn-primary ">Confirm</a>
+        </div>
+    </div>
+    {% endif %}
+    {% endif %}
+
+
+
+</div>
+
+
+{% endblock %}

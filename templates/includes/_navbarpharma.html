@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-md">
+  <i class="fas fa-stethoscope fa-3x mx-3 text-white"></i>
+  <a class="navbar-brand" href="/dashboard">HMS</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fas fa-align-right text-light"></i>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard/addMedicine">Add<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard/updateMedicine">Update<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard/viewMedicine">View<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/dashboard/issueMedicine">Issue Medicines <span class="sr-only">(current)</span></a>
+      </li>
+
+    </ul>
+    <ul class="navbar-nav navbar-right">
+      {% if session.logged_in %}
+      <li class="nav-item active">
+        <i class="fas fa-user fa-2x text-white"></i>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#">{{session.user}}</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+      {% endif %}
+
+
+    </ul>
+  </div>
+</nav>
+<br>

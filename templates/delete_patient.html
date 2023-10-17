@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block body %}
+<script src="{{url_for('static', filename='js/cities.js')}}"></script>
+
+{% include "includes/_messages.html" %}
+
+<div class='container'>
+    <div class="row justify-content-center">
+        <div class="col my-3">
+            <h1 class="display-4 text-center">Delete Patient</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-12 my-2">
+            <form method="POST" action='/dashboard/deletePatient'>
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Patient Id<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="text" class="form-control" name="patient_id" id="patient_id"
+                            aria-describedby="helpId" placeholder="" required>
+                    </div>
+                </div>
+                <div class="row justify-content-center my-3">
+
+                    <div class="col-md-4 col-12 my-md-0 my-2">
+                        <input type="submit" class="btn btn-primary btn-block " value="Get">
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if p %}
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-12 my-2">
+            <form method="POST" action='/dashboard/patientDelete'>
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Patient SSN<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="text" class="form-control" name="patient_ssn" id="patient_ssn" value="{{p.pat_ssn}}"
+                            aria-describedby="helpId" placeholder="" readonly>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>Patient Name<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="text" class="form-control" name="patient_name" id="patient_name" value="{{p.pat_name}}"
+                            aria-describedby="helpId" placeholder="" readonly>
+                    </div>
+                </div>
+
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Age<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="number" class="form-control" name="age" id="age" aria-describedby="helpId" value="{{p.pat_age}}"
+                            placeholder="" readonly>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>Date of Admission<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="date" class="form-control" name="doa" id="doa" aria-describedby="helpId" value="{{p.pat_doa}}"
+                            placeholder="" readonly>
+                    </div>
+                </div>
+
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Type of Bed<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="text" class="form-control" name="bed_type" id="bed_type" aria-describedby="helpId" value="{{p.pat_bed_type}}"
+                            placeholder="" readonly>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>Address<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <textarea rows="4" cols="50" class="form-control" name="address" id="address"
+                            readonly>{{p.pat_addr}}</textarea>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>State<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12 form-group">
+                        <input type="text" class="form-control" name="state" id="state" aria-describedby="helpId" value="{{p.pat_state}}"
+                            placeholder="" readonly>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>City<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12 form-group">
+                        <input type="text" class="form-control" name="city" id="city" aria-describedby="helpId" value="{{p.pat_city}}"
+                            placeholder="" readonly>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>Status<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12 form-group">
+                        <input type="text" class="form-control" name="status" id="status" aria-describedby="helpId" value="{{p.pat_status}}"
+                            placeholder="" readonly>
+                    </div>
+                </div>
+                <div class="row justify-content-center my-3">
+
+                    <div class="col-md-6 col-12 my-md-0 my-2">
+                        <input type="submit" class="btn btn-danger btn-block " value="Delete">
+
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% endif %}
+
+</div>
+<script language="javascript">print_state("patient_state");</script>
+{% endblock %}

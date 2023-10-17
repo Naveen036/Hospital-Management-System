@@ -1,0 +1,18 @@
+/* Google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Lobster&family=Patua+One&family=Rubik:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&family=Sniglet:wght@400;800&display=swap');
+
+:root {
+    --Single-font: "Sniglet", cursive;
+    --Rubik: "Rubik", cursive;
+    --Patua: "Patua One", cursive;
+    --Lobster: "Lobster", cursive;
+    --lightblack: #2e2c2caf;
+    --bggradient: linear-gradient(to bottom, #191654, #43c6ac);
+    --light-gray: rgba(255, 255, 255, 0.877);
+}
+
+header a {
+    font-family: var(--Single-font);
+    font-size: 0.9em;
+    color: whitesmoke !important;
+}

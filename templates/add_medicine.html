@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block body %}
+<script src="{{url_for('static', filename='js/cities.js')}}"></script>
+
+{% include "includes/_messages.html" %}
+
+<div class='container'>
+    <div class="row justify-content-center">
+        <div class="col my-3">
+            <h1 class="display-4 text-center">Add Medicine</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-12 my-2">
+            <form method="POST" action='/dashboard/addMedicine'>
+                
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Medicine Name<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="text" class="form-control" name="mname" id="mname"
+                            value="" aria-describedby="helpId" placeholder="" required>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>Cost per unit<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="number" class="form-control" name="mcost" id="mcost"
+                            value="" aria-describedby="helpId" placeholder="" required>
+                    </div>
+                </div>
+
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Quantity<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="number" class="form-control" name="mqty" id="mqty" aria-describedby="helpId"
+                            value="" placeholder="" required>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center my-3">
+
+                    <div class="col-md-6 col-12 my-md-0 my-2">
+                        <input type="submit" class="btn btn-success btn-block " value="Submit">
+
+                    </div>
+                    <div class="col-md-6 col-12 my-md-0 my-2">
+                        <input type="reset" class="btn btn-secondary btn-block " value="Reset">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+<script language="javascript">print_state("patient_state");</script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+
+{%block body%}
+
+    {% if session.user =='cash' %}
+
+        {% include "includes/_dashcash.html" %}
+
+    {% elif session.user=='pharmacist' %}
+
+        {% include "includes/_dashpharma.html" %}
+
+    {% else %}
+
+        {% include "includes/_dashdiag.html" %}
+
+    {% endif %}
+
+{% endblock %}

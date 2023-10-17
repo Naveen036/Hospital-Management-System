@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+
+{% include "includes/_messages.html" %}
+
+<div class='container'>
+    <div class="row justify-content-center">
+        <div class="col my-3">
+            <h1 class="display-4 text-center">Issue Diagnostic</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center my-4">
+        <form method='POST' action='/dashboard/issueDiagnostic'>
+            <div class="row my-2">
+                <div class="col-md-3 col-12 my-2 text-md-center">
+                    <label for="">Patient Id<span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-6 col-12 my-2">
+                    <input type="text" class="form-control" name="patient_id" id="patient_id" aria-describedby="helpId"
+                        placeholder="" required="">
+                </div>
+                <div class="col-md-3 col-12 my-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% if p %}
+    <div class="row justify-content-center">
+        <div class="col-12 my-3">
+            <table class=" table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Patient ID</th>
+                        <th scope="col">Patient Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">DOJ</th>
+                        <th scope="col">Type of Room</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <tr>
+                        <td>{{p.pat_id}}</td>
+                        <td>{{p.pat_name}}</td>
+                        <td>{{p.pat_age}}</td>
+                        <td>{{p.pat_addr}}</td>
+                        <td>{{p.pat_doa}}</td>
+                        <td>{{p.pat_bed_type}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% if patdiag %}
+    <div class="row justify-content-center my-4">
+        <div class="col-md-6 col-12 my-3">
+
+            <table class=" table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Diagnostic Test Name</th>
+                        <th scope="col">Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for pd in patdiag %}
+                    <tr>
+                        <td> {{pd.patdiag_name}}</td>
+                        <td>{{pd.patdiag_cost}}</td>
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% endif %}
+    <div class="row justify-content-center my-4">
+        <form method='POST' action='/dashboard/issueDiagnostic/add'>
+            <div class="row my-2">
+                <div class="col-md-4 col-12 my-2 text-md-center">
+                    <label for="">Diagnostic Test Name<span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-5 col-12 my-2">
+                    <select id="diag_name" name="diag_name" class="form-control">
+                        <option value="">Select Option</option>
+                        {% for d in alldiag %}
+                        <option value="{{d.diag_name}}">{{d.diag_name}}</option>
+                        {%endfor%}
+                    </select>
+                    <!--input type="text" class="form-control" name="diag_name" id="diag_name" aria-describedby="helpId"
+                        placeholder="" required=""-->
+                </div>
+                <div class="col-md-3 col-12 my-2">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    {% if diagnostic %}
+    <div class="row justify-content-center my-4">
+        <div class="col-md-6 col-12 my-3">
+
+            <table class=" table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Diagnostic Test Name</th>
+                        <th scope="col">Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for d in diagnostic %}
+                    <tr>
+                        <td> {{d.diag_name}}</td>
+                        <td>{{d.diag_cost}}</td>
+                    </tr>
+
+                    {% endfor %}
+
+
+                </tbody>
+            </table>
+            <div class="row justify-content-center my-4">
+                <div class="col-md-4 col-12 my-3">
+                    <a href="/dashboard/issueDiagnostic/issueDiagDone" class="btn btn-primary text-center">Issue
+                        Diagnostics</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        {% endif %}
+
+    </div>
+
+    {% endblock %}

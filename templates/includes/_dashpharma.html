@@ -1,0 +1,104 @@
+<div class="container">
+    <div class="row justify-content-start">
+        <div class="col my-3">
+            <h1 class="display-3 float-left">Quick Actions</h1>
+        </div>
+    </div>
+
+    <div class="row justify-content-center my-4">
+        <div class="col-md-4 col-sm-6 col-12 m-2 text-center">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title">Add medicine</h5>
+                    <a href="/dashboard/addMedicine" class="btn btn-primary border-radius">Go &raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12 m-2 text-center">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title">Update medicine</h5>
+                    <a href="/dashboard/updateMedicine" class="btn btn-primary border-radius">Go &raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center my-4">
+        <div class="col-md-4 col-sm-6 col-12 m-2 text-center">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title">View medicines</h5>
+                    <a href="/dashboard/viewMedicine" class="btn btn-primary border-radius">Go &raquo;</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6 col-12 m-2 text-center">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title">Issue Medicines</h5>
+                    <a href="/dashboard/issueMedicine" class="btn btn-primary border-radius">Go &raquo;</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row justify-content-start">
+        <div class="col my-2">
+            <h1 class="display-3 float-left">Quick Search</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center my-4">
+        <form method='POST' action='/dashboard/patMedSearch'>
+            <div class="row my-2">
+                <div class="col-md-3 col-12 my-2 text-md-center">
+                    <label for="">Patient Id<span class="text-danger">*</span></label>
+                </div>
+                <div class="col-md-6 col-12 my-2">
+                    <input type="text" class="form-control" name="patient_id" id="patient_id" aria-describedby="helpId"
+                        placeholder="" required="">
+                </div>
+                <div class="col-md-3 col-12 my-2">
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8 mb-5">
+            {% include "includes/_messages.html" %}
+        </div>
+    </div>
+    {% if patmed %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 mb-5">
+            <table class=" table table-bordered table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Patient ID</th>
+                        <th scope="col">Medicine Name</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Amount</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for pm in patmed %}
+                    <tr>
+                        <th>{{pm.pat_id}}</th>
+                        <td>{{pm.patmed_name}}</td>
+                        <td>{{pm.patmed_cost}}</td>
+                        <td>{{pm.patmed_qty}}</td>
+                        <td>{{pm.patmed_amt}}</td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    {% endif %}
+</div>

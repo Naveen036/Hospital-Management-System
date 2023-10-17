@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+
+{% include "includes/_messages.html" %}
+
+<div class='container'>
+    <div class="row justify-content-center">
+        <div class="col my-3">
+            <h1 class="display-4 text-center">Update Medicine</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-12 my-2">
+            <form method="POST" action='/dashboard/updateMedicine'>
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Medicine Id<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="text" class="form-control" name="medicine_id" id="medicine_id"
+                            aria-describedby="helpId" placeholder="" required>
+                    </div>
+                </div>
+                <div class="row justify-content-center my-3">
+
+                    <div class="col-md-4 col-12 my-md-0 my-2">
+                        <input type="submit" class="btn btn-primary btn-block " value="Get">
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    {% if m %}
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-12 my-2">
+            <form method="POST" action='/dashboard/medicineUpdate'>
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Medicine Id<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="text" class="form-control" name="mid" id="mid"
+                            value="{{m.med_id}}" aria-describedby="helpId" placeholder="" readonly>
+                    </div>
+                </div>
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Medicine Name<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="text" class="form-control" name="mname" id="mname"
+                            value="{{m.med_name}}" aria-describedby="helpId" placeholder="" required>
+                    </div>
+                </div>
+                <div class="row my-4">
+
+                    <div class="col-md-4 col-12">
+                        <label>Cost per unit<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="number" class="form-control" name="mcost" id="mcost"
+                            value="{{m.med_cost}}" aria-describedby="helpId" placeholder="" required>
+                    </div>
+                </div>
+
+                <div class="row my-4">
+                    <div class="col-md-4 col-12">
+                        <label>Quantity Available<span class="text-danger">*</span></label>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <input type="number" class="form-control" name="mqty" id="mqty" aria-describedby="helpId"
+                            value="{{m.med_qty}}" placeholder="" required>
+                    </div>
+                </div>
+               
+                <div class="row justify-content-center my-3">
+
+                    <div class="col-md-6 col-12 my-md-0 my-2">
+                        <input type="submit" class="btn btn-primary btn-block " value="Update">
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
